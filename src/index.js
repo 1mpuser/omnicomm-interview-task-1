@@ -1,6 +1,6 @@
-const React = require('react')
-const ReactDOM = require('react-dom')
-const ReactApp = require('./app.js').App
+const React = require('react');
+const ReactDOM = require('react-dom');
+const ReactApp = require('./App.js').App;
 
-const el = document.getElementById("root")
-ReactDOM.render(<ReactApp/>, el)
+const el = document.getElementById('root');
+ReactDOM.render(<ReactApp />, el);

@@ -1,38 +1,46 @@
-import { ApiMixinFactory } from './mixins/apiMixin'
-var tableMixin = require('./mixins/tableMixin').default
-var paginationMixin = require('./mixins/paginationMixin')
-var React = require('react')
-var createReactClass = require('create-react-class')
-var Pagination = require('./Pagination').default
-var $ = require('jquery')
+const { ApiMixinFactory } = require('./mixins/apiMixin');
+const tableMixin = require('./mixins/tableMixin').default;
+const paginationMixin = require('./mixins/paginationMixin');
+const React = require('react');
+const createReactClass = require('create-react-class');
+const Pagination = require('./Pagination').default;
+const $ = require('jquery');
 
-const apiMixin =  ApiMixinFactory().getApiMixin($.ajax)
-var App = createReactClass({
-    mixins: [
-        tableMixin,
-        paginationMixin,
-        apiMixin
-    ],
-    render: function () {
-        var self = this
-            var start = (this.state.itemsPerPage * (this.state.activePage - 1))
-            var end = start * this.state.itemsPerPage
-            var universities = this.state.universities.slice(start, start * this.state.itemsPerPage)
-        var table = self.renderTable(universities)
+const apiMixin = new ApiMixinFactory().getApiMixin($.ajax);
+const App = createReactClass({
+	mixins: [tableMixin, paginationMixin, apiMixin],
 
-            return (<div>
-                <label htmlFor="#search">Поиск</label>
-                <br/>
-                <input id="search" onChange={this.handleSearchChange} type="string" value={this.state.value}/>
-                <div>
-                    {table}
-                </div>
-                <Pagination itemsPerPage={10}
-                            totalItems={this.state.universities.length}
-                            onPageChange={() =>self.handleClick()}/>
-                <div>{this.state.color}</div>
-            </div>)
-        }
-})
+	render() {
+		const self = this;
+		const start = this.state.itemsPerPage * (this.state.activePage - 1);
+		const end = this.state.itemsPerPage * this.state.activePage;
+		const universities = this.state.universities.slice(start, end);
+		console.log(end);
+		// console.log(this.state.universities);
+		const table = self.renderTable(universities);
 
-export {App}
+		// console.log(table);
+
+		return (
+			<div>
+				<label htmlFor='#search'>Поиск</label>
+				<br />
+				<input
+					id='search'
+					onChange={this.handleSearchChange}
+					type='string'
+					value={this.state.value}
+				/>
+				<div>{table}</div>
+				<Pagination
+					itemsPerPage={10}
+					totalItems={this.state.universities.length}
+					onPageChange={() => self.handleClick()}
+				/>
+				<div>{this.state.color}</div>
+			</div>
+		);
+	},
+});
+
+export { App };
