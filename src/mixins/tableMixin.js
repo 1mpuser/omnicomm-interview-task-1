@@ -18,7 +18,6 @@ var tableMixin = {
 		if (!rows.length) {
 			return null;
 		}
-		console.log(rows);
 		return (
 			<table>
 				<tr>
@@ -26,7 +25,7 @@ var tableMixin = {
 					<th>Country code</th>
 					<th>Domains</th>
 				</tr>
-				{rows.map((u) => (
+				{rows.map((u, index) => (
 					<tr>
 						<td>{u.name}</td>
 						<td>{u.alpha_two_code}</td>

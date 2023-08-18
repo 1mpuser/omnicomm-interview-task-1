@@ -30,7 +30,6 @@ ApiMixinFactory.prototype.getApiMixin = function (httpClient) {
 				method: 'GET',
 			})
 				.then((res) => {
-					// console.log(res);
 					this.setTable(res);
 				})
 				.catch((err) => console.error(err));

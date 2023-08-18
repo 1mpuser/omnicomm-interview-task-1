@@ -15,11 +15,7 @@ const App = createReactClass({
 		const start = this.state.itemsPerPage * (this.state.activePage - 1);
 		const end = this.state.itemsPerPage * this.state.activePage;
 		const universities = this.state.universities.slice(start, end);
-		console.log(end);
-		// console.log(this.state.universities);
 		const table = self.renderTable(universities);
-
-		// console.log(table);
 
 		return (
 			<div>
@@ -35,7 +31,7 @@ const App = createReactClass({
 				<Pagination
 					itemsPerPage={10}
 					totalItems={this.state.universities.length}
-					onPageChange={() => self.handleClick()}
+					onPageChange={(pageNumber) => self.handleClick(pageNumber)}
 				/>
 				<div>{this.state.color}</div>
 			</div>
